@@ -1,0 +1,75 @@
+td {
+    white-space: nowrap;
+}
+
+
+
+.couleur_message_erreur {
+    background-color: #FF0000;
+}
+
+
+/* Ligne de depense virtuel */
+.couleur_ligne_virtuel {
+    background-color: #FFFFFF;
+}
+
+/* $color_date_too_old */
+.couleur_date_trop_ancienne {
+    background-color: #FF7777;
+}
+
+/* $color_date_past */
+.couleur_date_ancienne {
+    background-color: #7777FF;
+}
+
+/* $color_today */
+.couleur_date_aujourdhui {
+    background-color: #AAAAAA;
+}
+
+/* $color_date_tocome */
+.couleur_date_avenir {
+    background-color: #77FF77;
+}
+
+/* $color_date_too_tocome */
+.couleur_date_trop_avenir {
+    background-color: #FFFF00;
+}
+
+
+.couleur_date_inconnue {
+    background-color: #666666;
+}
+
+
+
+/* $table_title_color */
+.couleur_table_titre {
+    background-color: #AAAAAA;
+}
+/* $table_column_title_color */
+.couleur_table_colonne_titre {
+    background-color: #BBBBBB;
+}
+/* $table_row_even */
+.couleur_table_ligne_pair {
+    background-color: #EEEEEE;
+}
+/* $table_row_odd */
+.couleur_table_ligne_impair {
+    background-color: #DDDDDD;
+}
+
+
+
+/* $color_montant_negatif */
+.couleur_montant_negatif {
+    background-color: #FF7777;
+}
+/* $color_montant_positif */
+.couleur_montant_positif {
+    background-color: #77FF77;
+}

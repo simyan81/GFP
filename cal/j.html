@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <title>htmlDatePicker Test Page (CFML)</title>
+  <script language="JavaScript" type="text/javascript" src='cal.js'></script>
+  <link rel='stylesheet' href='cal.css' />
+</head>
+
+<body>
+<cfif IsDefined("form.SelectedDate")>
+  <p>You selected the date: <cfoutput>#form.SelectedDate# (#DateFormat(form.SelectedDate,"mmmm dd, yyyy")#)</cfoutput></p>
+</cfif>
+<form action="datepicker.cfm" method="post" name="frmMain" id="frmMain">
+<bR>
+  Please select a date: 
+  <input type="text" value="2012-11-02" name="SelectedDate" id="SelectedDate" readonly onClick="GetDate(this);">
+</form>
+</body>
+</html>
