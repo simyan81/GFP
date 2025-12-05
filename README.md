@@ -15,5 +15,5 @@ Pour l'installation :<br>
 - git clone https://github.com/simyan81/GFP.git<br>
 - mysql < init.sql<br>
 <br>
-En théorie, cela devrais fonctionné, mais je n'ai pas essayer la procedure d'installation :)
+En théorie, cela devrais fonctionné, mais je n'ai pas essayer la procedure d'installation complète :)
 
