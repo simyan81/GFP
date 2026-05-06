@@ -5,4 +5,7 @@
     $mysql_user = 'CHANGEZ MOI';
     $mysql_pass = 'CHANGEZ MOI';
 
+// Nonce secret
+    define('NONCE_SECRET', 'CHANGEZ MOI');
+
 ?>
