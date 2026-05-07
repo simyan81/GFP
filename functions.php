@@ -8,6 +8,7 @@
 
   // Initialisation de Smarty
     $smarty = new Smarty;
+    $smarty->escape_html = true;
     // $smarty->debugging = true;
     $smarty->caching = false;
     //$smarty->caching = true;
@@ -160,25 +161,68 @@
 /******************************************************************************************************
 **** ObtenirValeur : Obtien les valeurs du POST ou du GET                                          ****
 ******************************************************************************************************/
-  function ObtenirValeur($nomvaleur, $valeurpardefault) {
-    unset ($v);
+  function ObtenirValeur($nomvaleur, $valeurpardefault, $contexte = 'string') {
+    $v = null;
     if (isset($_POST[$nomvaleur])) {
       $v = $_POST[$nomvaleur];
-    } else {
-      if (isset($_GET[$nomvaleur])) {
-        $v = $_GET[$nomvaleur];
-      } else {
-        // Rien
-      }
+    } elseif (isset($_GET[$nomvaleur])) {
+      $v = $_GET[$nomvaleur];
     }
-    if (!isset ($v)) {
+    if (!isset($v)) {
       return $valeurpardefault;
     }
-    if (!is_numeric($v) &&
-        !is_array($v) ) {
-      $v = addslashes($v);
+    return NettoyerValeur($v, $valeurpardefault, $contexte);
+  }
+
+  function NettoyerValeur($valeur, $valeurpardefault, $contexte = 'string') {
+    if (is_array($valeur)) {
+      return array_map(function($item) use ($valeurpardefault, $contexte) {
+        return NettoyerValeur($item, $valeurpardefault, $contexte);
+      }, $valeur);
     }
-    return $v;
+    if (is_object($valeur)) {
+      return $valeurpardefault;
+    }
+
+    $valeur = (string)$valeur;
+    $valeur = str_replace("\0", '', $valeur);
+    $valeur = trim($valeur);
+    $valeur = preg_replace('/[\x00-\x1F\x7F]/u', '', $valeur);
+
+    if (is_int($valeurpardefault)) {
+      if (filter_var($valeur, FILTER_VALIDATE_INT) !== false) {
+        return intval($valeur);
+      }
+      return $valeurpardefault;
+    }
+    if (is_float($valeurpardefault)) {
+      if (filter_var($valeur, FILTER_VALIDATE_FLOAT) !== false) {
+        return floatval($valeur);
+      }
+      return $valeurpardefault;
+    }
+    if (is_bool($valeurpardefault)) {
+      $result = filter_var($valeur, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+      return $result === null ? $valeurpardefault : $result;
+    }
+
+    switch ($contexte) {
+      case 'url':
+        return filter_var($valeur, FILTER_VALIDATE_URL) ?: $valeurpardefault;
+      case 'email':
+        return filter_var($valeur, FILTER_VALIDATE_EMAIL) ?: $valeurpardefault;
+      case 'alpha':
+        return preg_match('/^[a-zA-Z0-9_\- ]*$/u', $valeur) ? $valeur : $valeurpardefault;
+      case 'alnum':
+        return preg_match('/^[a-zA-Z0-9_\-]*$/u', $valeur) ? $valeur : $valeurpardefault;
+      case 'token':
+        return preg_match('/^[a-zA-Z0-9_\-]+$/u', $valeur) ? $valeur : $valeurpardefault;
+      case 'path':
+        $valeur = str_replace('..', '', $valeur);
+        return preg_replace('#[\\/]+#', '/', $valeur);
+      default:
+        return $valeur;
+    }
   }
 
 

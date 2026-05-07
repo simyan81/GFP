@@ -16,7 +16,7 @@
       </form>
 
     Pour la verification
-      $nonce = ObtenirValeur('nonce', '');
+      $nonce = ObtenirValeur('nonce', '', 'token');
       if ( $cnonce->verifyNonce($nonce) ) {
         // Ok
       } else {

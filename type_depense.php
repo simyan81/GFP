@@ -6,7 +6,7 @@
 
 
   // Obtient quelques valeurs
-    $action = ObtenirValeur('action', 'liste');
+    $action = ObtenirValeur('action', 'liste', 'token');
     $modifier_type_depense_id = ObtenirValeur('modifier_type_depense_id', '-1');
     $effacer_type_depense_id = ObtenirValeur('effacer_type_depense_id', '-1');
     if (!is_numeric($modifier_type_depense_id)) {
@@ -25,7 +25,7 @@
     switch ($action) {
       case 'ajouter_type_depense':
         // Obtient quelques valeurs
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $description = ObtenirValeur('ajouter_depense_description', '');
           $symbole = ObtenirValeur('ajouter_depense_symbole', 0);
           $ordre = ObtenirValeur('ajouter_depense_ordre', 0);
@@ -77,7 +77,7 @@
 
       case 'modifier_type_depense':
         // Obtient quelques valeurs
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $type_depense_id = ObtenirValeur('type_depense_id', '');
           $description = ObtenirValeur('modifier_type_depense_description', '');
           $symbole = ObtenirValeur('modifier_type_depense_symbole', 0);
@@ -113,7 +113,6 @@
             } else {
               $ajout_msg .= 'La ligne s&eacute;lectionner &agrave; &eacute;t&eacute; mise &agrave; jour.<BR>';
             }
-            $ajout_msg .= $sql;
           }
         // Actualise les listes
           ObtenirListeTypeDepense();
@@ -121,7 +120,7 @@
 
       case 'effacer_type_depense':
         // Obtient quelques valeurs
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $type_depense_id = ObtenirValeur('type_depense_id', '');
           $valide = true;
         // Valide quelques
@@ -154,7 +153,7 @@
 
       case 'deplacer_type_depense':
         // Obtient quelques valeurs
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $type_depense_id = ObtenirValeur('type_depense_id', '');
           $ordre = ObtenirValeur('ordre', '');
           $valide = true;

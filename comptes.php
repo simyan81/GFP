@@ -13,7 +13,7 @@
 
 
   // Obtient quelques valeurs
-    $action = ObtenirValeur('action', 'liste');
+    $action = ObtenirValeur('action', 'liste', 'token');
     $defilerauid = ObtenirValeur('defilerauid', -1);
 
 
@@ -76,7 +76,7 @@
 
       case 'ajouter_compte':
           // Obtient quelques valeurs
-            $nonce = ObtenirValeur('nonce', '');
+            $nonce = ObtenirValeur('nonce', '', 'token');
             $compte_description = ObtenirValeur('ajouter_compte_description', '');
             $compte_groupe = ObtenirValeur('ajouter_compte_groupe', 0);
             $compte_type = ObtenirValeur('ajouter_compte_type', 0);
@@ -125,7 +125,7 @@
 
       case 'ajouter_groupe':
         // Obtient quelques valeurs
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $groupe_description = ObtenirValeur('ajouter_groupe_description', '');
           $groupe_ordre = ObtenirValeur('ajouter_groupe_ordre', 0);
         // Valide quelques valeurs
@@ -161,7 +161,7 @@
 
       case 'compte_modifier_confirmer':
         // Obtient quelques valeurs
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $compte_id = ObtenirValeur('modifier_compte_id', 0);
           $description = ObtenirValeur('modifier_description', '');
           $methode_calcule_interet = ObtenirValeur('modifier_methode_calcule_interet', 0);
@@ -207,7 +207,7 @@
 
       case 'compte_effacer_confirmer':
         // Obtient quelques valeurs
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $compte_id = ObtenirValeur('effacer_compte_id', 0);
           $errmsg = '';
           $valide = true;
@@ -314,7 +314,7 @@
 
       case 'groupe_modifier_confirmer':
         // Obtient quelques valeurs
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $groupe_id = ObtenirValeur('modifier_groupe_id', 0);
           $description = ObtenirValeur('modifier_description', '');
           $errmsg = '';
@@ -356,7 +356,7 @@
 
    case 'groupe_effacer_confirmer':
         // Obtient quelques valeurs
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $groupe_id = ObtenirValeur('effacer_groupe_id', 0);
           $errmsg = '';
           $valide = true;

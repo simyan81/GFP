@@ -13,7 +13,9 @@ Pour l'installation :<br>
 - mkdir gfp<br>
 - cd gfp<br>
 - git clone https://github.com/simyan81/GFP.git<br>
+- cp config.sample.php config.php<br>
+- nano config.php<br>
 - mysql < init.sql<br>
 <br>
-En théorie, cela devrais fonctionné, mais je n'ai pas essayer la procedure d'installation :)
+En théorie, cela devrais fonctionné ! :)
 

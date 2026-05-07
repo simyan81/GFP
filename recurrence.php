@@ -6,7 +6,7 @@
 
 
   // Obtient quelques valeurs
-    $action = ObtenirValeur('action', 'list');
+    $action = ObtenirValeur('action', 'list', 'token');
     $defilerauid = ObtenirValeur('defilerauid', -1);
 
 
@@ -51,7 +51,7 @@
     switch ($action) {
       case 'ajouter_recurrence':
         // Obtient quelques valeurs
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $recurrence_id = -1;
           $recurrence_date_debut = ObtenirValeur('ajouter_recurrence_date_debut', '');
           $recurrence_date_fin = ObtenirValeur('ajouter_recurrence_date_fin', '');
@@ -156,7 +156,7 @@
 
       case 'modifier_recurrence_confirme':
         // Obtiens quelques valeurs
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $recurrence_id = ObtenirValeur('recurrence_id', -1);
           $recurrence_date_debut = ObtenirValeur('recurrence_date_debut', '');
           $recurrence_date_fin = ObtenirValeur('recurrence_date_fin', '');
@@ -206,7 +206,7 @@
         break;
       case 'effacer_recurrence_confirme':
         // Obtient quelques valeurs
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $recurrence_id = ObtenirValeur('recurrence_id', -1);
           $recurrence_date_debut = '';
           $recurrence_date_fin = '';
@@ -259,7 +259,7 @@
 
       case 'deplacer_recurrence':
         // Obtient quelques valeurs
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $recurrence_id = ObtenirValeur('recurrence_id', '');
           $ordre = ObtenirValeur('ordre', '');
           $valid = true;

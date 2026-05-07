@@ -7,7 +7,7 @@
 
   // Obtient quelques valeurs
     $compte_id = ObtenirValeur('compte_id', -1);
-    $action = ObtenirValeur('action', 'liste');
+    $action = ObtenirValeur('action', 'liste', 'token');
     $defilerauid = ObtenirValeur('defilerauid', -1);
 
 
@@ -85,7 +85,7 @@
       case "ajouterdepense":
         // Obtient quelques valeurs
           $ajouter = true;
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $date_depense = ObtenirValeur("ajouter_date_depense", '');
           $type_transaction_id = ObtenirValeur("ajouter_type_transaction_id", 0);
           $type_depense_id = ObtenirValeur("ajouter_type_depense_id", 0);
@@ -129,7 +129,7 @@
         // Obtient quelques valeurs
           //modifier_type_transaction_id
           //modifier_transfert_compte_id
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $depense_id = ObtenirValeur('modifier_depense_id', 0);
           $date_depense = ObtenirValeur('modifier_date_depense', $maintenant);
           $type_depense_id = ObtenirValeur('modifier_type_depense_id', 0);
@@ -163,7 +163,7 @@
 
       case 'depense_effacer_confirmer':
         // Obtient quelques valeurs
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $depense_id = ObtenirValeur('effacer_depense_id', 0);
         // Verifie que la depense existe
           $valide = true;
@@ -202,7 +202,7 @@
 
       case "reconcilier":
         // Obtient quelques valeurs
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $reconcilier = ObtenirValeur('liste_reconcilier_id', '');
         // Valide quelques valeurs
           if ($reconcilier == '') {
@@ -291,7 +291,7 @@
 
       case "pointer":
         // Obtient quelques valeurs
-          $nonce = ObtenirValeur('nonce', '');
+          $nonce = ObtenirValeur('nonce', '', 'token');
           $pointer = ObtenirValeur('liste_pointer_id', '');
         // Valide quelques valeurs
           if ($pointer == '') {
@@ -1072,7 +1072,8 @@ function creerLigneVirtuelle($compte_id, $date_depense, $type_transaction_id, $t
 
 // Function qui genere des lignes vides
 function GenereLigneJourneeVide(&$lignes, $lignes_date, $date_depart, $date_fin) {
-                    $boucle_infinie = 1000;
+  $solde_actuelle = 0;
+$boucle_infinie = 1000;
                     $prochaine_date_vide = strtotime($date_depart);
                     $date_arret = strtotime(DateSeulement($date_fin));
                     do {

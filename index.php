@@ -177,7 +177,7 @@
       $template_fichier = 'logged.tpl';
     } elseif ($page == 'logout' ) {
       // Obtiens le nonce
-        $nonce = ObtenirValeur('nonce', '');
+        $nonce = ObtenirValeur('nonce', '', 'token');
       // Vérifie le nonce pour éviter CSRF
         if ($cnonce->verifyNonce($nonce)) {
           // Detruit la sessions

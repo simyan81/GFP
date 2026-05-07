@@ -6,7 +6,7 @@
 
 
   // Obtient quelques valeurs
-    $action = ObtenirValeur('action', 'liste');
+    $action = ObtenirValeur('action', 'liste', 'token');
 
 
   // Verifie les pre-action

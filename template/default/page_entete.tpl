@@ -15,13 +15,13 @@
     <script language="javascript" type="text/javascript">
       <!--
         // Placer ici, car dans le fichier JavaScript, les valeurs seront toujours 'javascript'
-        var template_fichier = '{$template_fichier}';
-        var script = '{$script}';
-        var page = '{$page}';
-        var url_base = '{$url_base}';
-        var url_actuelle = '{$url_actuelle}';
-        var defilerauid = '{$defilerauid}';
-        var compteid = '{$compte_id}';
+        var template_fichier = '{$template_fichier|escape:'javascript'}';
+        var script = '{$script|escape:'javascript'}';
+        var page = '{$page|escape:'javascript'}';
+        var url_base = '{$url_base|escape:'javascript'}';
+        var url_actuelle = '{$url_actuelle|escape:'javascript'}';
+        var defilerauid = '{$defilerauid|escape:'javascript'}';
+        var compteid = '{$compte_id|escape:'javascript'}';
       -->
     </script>
 

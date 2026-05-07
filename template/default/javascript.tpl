@@ -19,15 +19,15 @@
 {/literal}
 
   // Variable de Smarty
-    var utilisateur = '{$utilisateur}';
+    var utilisateur = '{$utilisateur|escape:'javascript'}';
     var type_transaction_transfert = {$type_transaction_transfert};
     // Placer dans : entete.tpl
-    // sera toujours 'javascript.tpl' dans ce fichier : var template_fichier = '{$template_fichier}'
-    // sera toujours 'javascript dans ce fichier : var page = '{$page}';
-    //   var url = '{$url_base}';
-    //   var url_actuelle = '{$url_actuelle}';
-    //   var defilerauid = '{$defilerauid}';
-    //   var compteid = '{$compte_id}';
+    // sera toujours 'javascript.tpl' dans ce fichier : var template_fichier = '{$template_fichier|escape:'javascript'}'
+    // sera toujours 'javascript dans ce fichier : var page = '{$page|escape:'javascript'}';
+    //   var url = '{$url_base|escape:'javascript'}';
+    //   var url_actuelle = '{$url_actuelle|escape:'javascript'}';
+    //   var defilerauid = '{$defilerauid|escape:'javascript'}';
+    //   var compteid = '{$compte_id|escape:'javascript'}';
 
   // Variable des listes
     {foreach $liste_type_depense as $id => $item}

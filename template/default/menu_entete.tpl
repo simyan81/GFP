@@ -45,12 +45,12 @@
 
 
 {if $erreur_msg != ""}
-  <font class="couleur_message_erreur">{$erreur_msg}</font>
+  <font class="couleur_message_erreur">{$erreur_msg nofilter}</font>
   <br />
 {/if}
 
 
 {if $ajout_msg != ""}
-  {$ajout_msg}
+  {$ajout_msg nofilter}
   <br />
 {/if}
