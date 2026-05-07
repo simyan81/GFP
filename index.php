@@ -46,7 +46,10 @@
 
 
   // URL de base (la variable sert juste pour ajouter les autres valeurs avec un &)
-    $url_actuelle = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    if (!defined('ALLOWED_DOMAIN') || ALLOWED_DOMAIN === 'CHANGEZ MOI') {
+      die('Domaine autorisé non configuré. Modifiez ALLOWED_DOMAIN dans config.php.');
+    }
+    $url_actuelle = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://" . ALLOWED_DOMAIN . $_SERVER['REQUEST_URI'];
     //$url_base = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]" . $_SERVER['SCRIPT_NAME'] . '?u=' . $_SESSION['db'];
     $url_base = FunctionURLDeBase($url_actuelle);
 

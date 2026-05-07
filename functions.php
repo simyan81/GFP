@@ -1,4 +1,11 @@
 <?php
+  // Inclure la configuration
+    if (file_exists('config.php')) {
+      require_once('config.php');
+    } else {
+      die('Fichier config.php manquant. Copiez config.sample.php vers config.php et configurez-le.');
+    }
+
   // Initialisation de Smarty
     $smarty = new Smarty;
     // $smarty->debugging = true;
@@ -561,8 +568,8 @@ function ajouterEntreeDepense(&$errmsg, &$ligne_virtuel, &$refid, $compte_id, $t
       $ligne['montant'] = abs($ligne['montant']);
       $ligne['montantformat'] =  formatMonnaie($ligne['montant'], $ligne['symbole']);
     // Solde
-      if (!isset( $ligne['solde'] ) ) {
-        $ligne['solde'] = formatMonnaie(0, 1);
+      if (!isset( $ligne['solde'] ) || !is_numeric( $ligne['solde'] ) ) {
+        $ligne['solde'] = 0; //formatMonnaie(0, 1);
       }
       $ligne['solde_symbole'] = ($ligne['solde'] < 0 ? 0 : 1);
       $ligne['soldeformat'] = formatMonnaie(abs($ligne['solde']), $ligne['solde_symbole']);
