@@ -116,9 +116,12 @@
             if (!$db_selected) {
               die ('Impossible de selectionner la base de donnees : ' . mysqli_error($mysql_conn));
             }
-            // Verifie si l'utilisateur existe
-            $sql = "SELECT * FROM " . $mysql_db . ".utilisateurs WHERE utilisateur='" . addslashes($utilisateur) . "' ";
-            $requete_resultat = mysqli_query($mysql_conn, $sql);
+            // Verifie si l'utilisateur existe (requête préparée pour éviter SQL injection)
+            $sql = "SELECT * FROM " . $mysql_db . ".utilisateurs WHERE utilisateur=?";
+            $stmt = mysqli_prepare($mysql_conn, $sql);
+            mysqli_stmt_bind_param($stmt, "s", $utilisateur);
+            mysqli_stmt_execute($stmt);
+            $requete_resultat = mysqli_stmt_get_result($stmt);
             if (!$requete_resultat) {
               die('Requ&ecirc;te invalide : ' . mysqli_error($mysql_conn));
             }
@@ -137,6 +140,8 @@
                 $_SESSION['db'] = '';
                 $_SESSION['utilisateur'] = '';
               } else {
+                // Regénère l'ID de session pour éviter la fixation de session
+                session_regenerate_id(true);
                 $_SESSION['identifier'] = 1;
                 $_SESSION['db'] = 'pfm_' . $ligne['db_prefix'];
                 $_SESSION['utilisateur'] = $ligne['utilisateur'];
@@ -147,6 +152,7 @@
             }
             // Libere les ressource
             mysqli_free_result($requete_resultat);
+            mysqli_stmt_close($stmt);
           } else { // nonce invalide
             $erreur = 'Délai de soumission dépassé';
           }
@@ -167,10 +173,19 @@
       $smarty->assign('page', 'logged', true);
       $template_fichier = 'logged.tpl';
     } elseif ($page == 'logout' ) {
-      // Detruit la sessions
-        session_destroy();
-      // Affiche le template
-        $template_fichier = 'logout.tpl';
+      // Obtiens le nonce
+        $nonce = ObtenirValeur('nonce', '');
+      // Vérifie le nonce pour éviter CSRF
+        if ($cnonce->verifyNonce($nonce)) {
+          // Detruit la sessions
+          session_destroy();
+          // Affiche le template
+          $template_fichier = 'logout.tpl';
+        } else {
+          $erreur = 'Délai de soumission dépassé';
+          $smarty->assign('erreur', $erreur, true);
+          $template_fichier = 'bienvenue.tpl';
+        }
 
     } elseif ($page == 'comptes') {
       require_once ('comptes.php');

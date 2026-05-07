@@ -154,9 +154,15 @@
 
       case 'deplacer_type_depense':
         // Obtient quelques valeurs
+          $nonce = ObtenirValeur('nonce', '');
           $type_depense_id = ObtenirValeur('type_depense_id', '');
           $ordre = ObtenirValeur('ordre', '');
           $valide = true;
+        // Vérifie le nonce
+          if ( ! $cnonce->verifyNonce($nonce) ) {
+            $erreur_msg .= 'D&eacute;lai de soumission d&eacute;pass&eacute;<BR>';
+            $valide = false;
+          }
         // Valide quelques valeurs
           if ( !is_numeric($type_depense_id) ||
                 !is_numeric($ordre) ) {

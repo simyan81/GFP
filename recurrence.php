@@ -259,9 +259,15 @@
 
       case 'deplacer_recurrence':
         // Obtient quelques valeurs
+          $nonce = ObtenirValeur('nonce', '');
           $recurrence_id = ObtenirValeur('recurrence_id', '');
           $ordre = ObtenirValeur('ordre', '');
           $valid = true;
+        // Vérifie le nonce
+          if ( ! $cnonce->verifyNonce($nonce) ) {
+            $erreur_msg .= 'D&eacute;lai de soumission d&eacute;pass&eacute;<BR>';
+            $valid = false;
+          }
         // Valide quelques valeurs
           if ( !is_numeric($recurrence_id) ||
                 !is_numeric($ordre) ) {
@@ -342,7 +348,11 @@
         $ligne ['interval'] = $ligne ['interval_valeur'];
         $ligne ['compte_id_text'] = $liste_compte[ $ligne ['compte_id']  ]['description'];
         $ligne ['type_transaction_id_text'] = $liste_type_transaction[ $ligne ['type_transaction_id']  ]['description'];
-        $ligne ['transfert_compte_id_text'] = $liste_compte[ $ligne ['transfert_compte_id']  ]['description'];
+        if (!isset ($ligne ['transfert_compte_id'])) {
+          $ligne ['transfert_compte_id_text'] = $liste_compte[ $ligne ['transfert_compte_id'] ]['description'];
+        } else {
+          $ligne ['transfert_compte_id_text'] = '';
+        }
         $ligne ['type_depense_id_text'] = $liste_type_depense[ $ligne ['type_depense_id']  ]['description'];
 	      $ligne ['symbole'] = ($ligne['montant'] < 0 ? 0 : 1);
         $ligne ['symbole_text'] = $liste_symbole[ $ligne ['symbole']  ];
